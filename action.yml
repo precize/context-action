@@ -1,0 +1,10 @@
+name: 'Precize Context'
+description: 'Enables Precize to enhance context for your Infrastructure as code setups'
+
+runs:
+  using: "composite"
+  steps:
+    - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
+      shell: bash
+    - run: context.sh
+      shell: bash

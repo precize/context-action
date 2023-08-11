@@ -16,7 +16,7 @@ do
    running=$(gh run list --status='in_progress' --repo $GITHUB_REPOSITORY --json headSha --jq '.[] | select(.headSha=="'$GITHUB_SHA'")')
    echo "Running: $running"
 
-   if [ -z $running ]; then
+   if [ -z "$running" ]; then
     echo "Here"
 	break
    fi

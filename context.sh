@@ -4,10 +4,12 @@ while true
 do
    echo "Checking if there are existing workflows to complete..."
    echo "Github sha: $GITHUB_SHA"
-   ls
-   pwd
    all=$(gh run list --repo $GITHUB_REPOSITORY --json headSha)
    echo "ALL: $all"
+   inprogress=$(gh run list --status='in_progress' --repo $GITHUB_REPOSITORY --json headSha)
+   echo "In progress: $inprogress"
+   nostatus=$(gh run list --repo $GITHUB_REPOSITORY --json headSha,status --jq '.[] | select(.headSha=="$GITHUB_SHA")')
+   echo "No status: $nostatus"
    running=$(gh run list --status='in_progress' --repo $GITHUB_REPOSITORY --json headSha --jq '.[] | select(.headSha=="$GITHUB_SHA")')
    echo "Running: $running"
 

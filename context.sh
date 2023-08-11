@@ -3,17 +3,7 @@
 while true
 do
    echo "Checking if there are existing workflows to complete..."
-   echo "Github sha: $GITHUB_SHA"
-   all=$(gh run list --repo $GITHUB_REPOSITORY --json headSha)
-   echo "ALL: $all"
-   inprogress=$(gh run list --status='in_progress' --repo $GITHUB_REPOSITORY --json headSha)
-   echo "In progress: $inprogress"
-   nostatus=$(gh run list --repo $GITHUB_REPOSITORY --json headSha,status --jq '.[] | select(.headSha=="$GITHUB_SHA")')
-   echo "No status: $nostatus"
-   grepway=$(gh run list --status='in_progress' --repo $GITHUB_REPOSITORY --json headSha | grep $GITHUB_SHA)
-   echo "Grep: $grepway"
-   echo "Final: gh run list --status='in_progress' --repo $GITHUB_REPOSITORY --json headSha --jq '.[] | select(.headSha=="$GITHUB_SHA")')"
-   running=$(gh run list --status='in_progress' --repo $GITHUB_REPOSITORY --json headSha --jq '.[] | select(.headSha=="'$GITHUB_SHA'")')
+   running=$(gh run list --status='in_progress' --json headSha,databaseId --jq '.[] | select((.headSha == "'$GITHUB_SHA'") and .databaseId != "'$GITHUB_RUN_ID'"')
    echo "Running: $running"
 
    if [ -z "$running" ]; then

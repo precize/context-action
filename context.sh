@@ -3,14 +3,11 @@
 while true
 do
    echo "Checking if there are existing workflows to complete..."
+   sleep 20
    running=$(gh run list --status='in_progress' --json headSha,databaseId --jq '.[] | select((.headSha == "'$GITHUB_SHA'") and .databaseId != '$GITHUB_RUN_ID')')
-   echo "Running: $running"
-
    if [ -z "$running" ]; then
-    echo "Here"
 	break
    fi
-   sleep 5
 done
 
 wget -q -O - https://github.com/bridgecrewio/yor/releases/download/0.1.183/yor_0.1.183_linux_amd64.tar.gz | tar -xvz -C /tmp

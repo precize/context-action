@@ -13,7 +13,7 @@ do
    grepway=$(gh run list --status='in_progress' --repo $GITHUB_REPOSITORY --json headSha | grep $GITHUB_SHA)
    echo "Grep: $grepway"
    echo "Final: gh run list --status='in_progress' --repo $GITHUB_REPOSITORY --json headSha --jq '.[] | select(.headSha=="$GITHUB_SHA")')"
-   running=$(gh run list --status='in_progress' --repo $GITHUB_REPOSITORY --json headSha --jq '.[] | select(.headSha=="$GITHUB_SHA")')
+   running=$(gh run list --status='in_progress' --repo $GITHUB_REPOSITORY --json headSha --jq '.[] | select(.headSha=="'$GITHUB_SHA'")')
    echo "Running: $running"
 
    if [ -z $running ]; then

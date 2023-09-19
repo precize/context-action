@@ -16,7 +16,7 @@ changedFiles=$(git log -m -1 --name-only --pretty="format:" $GITHUB_SHA | sed '/
 for file in "${changedFiles[@]}"
 do
    dir=${file%/*}
-   /tmp/yor tag -d . --tag-groups git --directory=$dir --skip-tags git_org,git_modifiers,git_last_modified_by,git_last_modified_at --parsers Terraform --tag-prefix precize_ --tag-local-modules false
+   /tmp/yor tag -d $dir --tag-groups git --skip-tags git_org,git_modifiers,git_last_modified_by,git_last_modified_at --parsers Terraform --tag-prefix precize_ --tag-local-modules false
 done
 
 git config --global user.name 'Precize'

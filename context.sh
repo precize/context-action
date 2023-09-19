@@ -14,9 +14,11 @@ wget -q -O - https://github.com/bridgecrewio/yor/releases/download/0.1.183/yor_0
 
 gitlogFiles=$(git log -m -1 --name-only --pretty="format:" $GITHUB_SHA | sed '/^[[:space:]]*$/d')
 echo "gitlogFiles: "$gitlogFiles
-IFS=' '
-read -ra changedFiles <<< "$gitlogFiles"
-echo "Changedfiles: "${changedFiles[@]}
+IFS=' ' read -ra changedFiles <<< $gitlogFiles
+echo "Changed files: "${changedFiles[@]}
+
+arr=($gitlogFiles)
+echo "Another method: "${arr[@]}
 
 for file in "${changedFiles[@]}"
 do

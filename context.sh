@@ -10,7 +10,7 @@ do
    fi
 done
 
-wget -q -O - https://github.com/bridgecrewio/yor/releases/download/0.1.183/yor_0.1.183_linux_amd64.tar.gz | tar -xvz -C /tmp
+wget -q -O - https://github.com/bridgecrewio/yor/releases/download/0.1.185/yor_0.1.185_linux_amd64.tar.gz | tar -xvz -C /tmp
 
 changedDirs=$(git log -m -1 --name-only --pretty="format:" $GITHUB_SHA | sed '/^[[:space:]]*$/d' | xargs dirname | sort -u)
 # Convert to array
